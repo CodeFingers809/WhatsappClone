@@ -3,33 +3,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:whatsapp/common/extension/custon_theme_extension.dart';
+import 'package:whatsapp/common/widgets/custom_elevated_button.dart';
 import 'package:whatsapp/feature/auth/widgets/Custom_Icon.dart';
 import 'package:whatsapp/feature/auth/widgets/custom_text_field.dart';
+import 'package:whatsapp/feature/welcome/pages/user_info_pages.dart';
 
 import 'lib/feature/auth/login_page.dart';
 
-class VerificationPage extends StatefulWidget {
-  const VerificationPage({super.key});
-
-  @override
-  State<VerificationPage> createState() => _VerificationPageState();
-}
-
-class _VerificationPageState extends State<VerificationPage> {
-  late TextEditingController otpController;
-
-  @override
-  void initState() {
-    otpController = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    otpController.dispose();
-    super.dispose();
-  }
-
+class VerificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,16 +68,12 @@ class _VerificationPageState extends State<VerificationPage> {
                 const SizedBox(height: 40),
               ],
             ),
-            // NOTE --->  DOONT USE CUSTOM TEXT FIELD WIDGET IT IS CREATING PROPLEM
-            //INSTED USE TEXT FIELD WIDGET
-
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
-                controller: otpController,
                 decoration: InputDecoration(
-                  hintText: ' Enter    OTP',
+                  hintText: ' Enter OTP',
                   hintStyle: TextStyle(fontSize: 25),
                   suffixIcon: Icon(Icons.lock),
                 ),
@@ -122,13 +99,29 @@ class _VerificationPageState extends State<VerificationPage> {
                 ),
               ],
             ),
-
             Divider(
-                thickness: 0.2,
-                color: context.theme.greyColor!.withOpacity(1),
-                endIndent: 2)
+              thickness: 0.2,
+              color: context.theme.greyColor!.withOpacity(1),
+              endIndent: 2,
+            ),
           ],
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: CustomElevatedButton(
+        onPressed: () {
+          // Navigate to the next page when the "NEXT" button is pressed
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  UserInfoPage(), // Replace with the actual destination page
+            ),
+          );
+        },
+        text: 'NEXT',
+        buttondWidth: 70, // Fix the property name
+        textStyle: TextStyle(color: context.theme.authAppbartextColor),
       ),
     );
   }

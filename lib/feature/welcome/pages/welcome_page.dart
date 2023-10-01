@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp/common/utils/colours.dart';
+//import 'package:whatsapp/common/extension/custom_theme_extension.dart'; // Correct import
+import 'package:whatsapp/common/widgets/custom_elevated_button.dart';
+import 'package:whatsapp/common/route/routes.dart'; // Correct import
+import 'package:whatsapp/feature/auth/login_page.dart';
+import 'package:whatsapp/feature/welcome/widgets/PrivacyAndTerms.dart'; // Correct import
+//import 'dart:js';
+
+import 'package:whatsapp/common/utils/colours.dart';
 import '../../../common/extension/custon_theme_extension.dart';
 import 'package:whatsapp/common/widgets/custom_elevated_button.dart';
-
+//import 'lib/common/route/routes.dart';
 import 'package:whatsapp/feature/welcome/widgets/PrivacyAndTerms.dart'; // Correct import
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
+
+  navigateToLoginPage(context) {
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(Routes.login, (route) => false);
+  }
+
   void showBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -156,7 +170,14 @@ class WelcomePage extends StatelessWidget {
                 ),
                 const PrivacyAndTerms(),
                 CustomElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ),
+                    );
+                  },
                   text: 'AGREE AND CONTINUE',
                   textStyle: TextStyle(),
                 ),

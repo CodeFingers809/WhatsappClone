@@ -7,9 +7,16 @@ import 'package:whatsapp/common/utils/colours.dart';
 import 'package:whatsapp/common/widgets/custom_elevated_button.dart';
 import 'package:whatsapp/feature/auth/widgets/Custom_Icon.dart';
 import 'package:whatsapp/feature/auth/widgets/custom_text_field.dart';
+import 'package:whatsapp/common/route/routes.dart';
+import 'package:whatsapp/feature/welcome/pages/verification_pages.dart';
+import 'lib/feature/welcome/pages/verification_pages.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+  navigateToVerificationPage(context) {
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(Routes.verification, (route) => false);
+  }
 
   @override
   State<LoginPage> createState() => _MyWidgetState();
@@ -20,6 +27,10 @@ class _MyWidgetState extends State<LoginPage> {
 //late TextEditingController countryNameController;
   late TextEditingController countryCodeController;
   late TextEditingController phoneNumberController;
+
+  var PhoneNumber;
+
+  get VerificationId => null;
 //late TextEditingController countryNameController;
   void initState() {
     countryNameController = TextEditingController(text: ' भारत ');
@@ -207,7 +218,15 @@ class _MyWidgetState extends State<LoginPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CustomElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => VerificationPage(),
+            ),
+          );
+        },
+
         text: 'NEXT',
         buttondWidth: 70, // Fix the property name
         textStyle: TextStyle(color: context.theme.authAppbartextColor),

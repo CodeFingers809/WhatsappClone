@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp/common/route/routes.dart';
 import 'package:whatsapp/common/theme/dark_theme.dart';
 import 'package:whatsapp/common/theme/light_theme.dart';
 import 'package:whatsapp/feature/auth/login_page.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
       theme: lightTheme(),
       darkTheme: darkTheme(),
       themeMode: ThemeMode.system,
-      home: const UserInfoPage(),
+      home: const WelcomePage(),
+      onGenerateRoute: Routes.onGenerateRoute,
     );
   }
 }
